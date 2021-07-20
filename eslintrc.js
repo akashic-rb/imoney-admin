@@ -10,9 +10,10 @@ module.exports = {
     "max-len": ["error", { "code": 360 }],
     "prettier/prettier": [ 
       "error",
-      { "endOfLine": "auto"}
-    ]
+      { "endOfLine": "auto" }
+    ],
   },
+  ignorePattern: ["/src/assets"],
   parserOptions: {
     parser: "babel-eslint"
   }
