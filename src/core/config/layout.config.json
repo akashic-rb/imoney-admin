@@ -12,7 +12,7 @@
   },
   "loader": {
     "type": "spinner-logo",
-    "logo": "media/logos/logo-AppsCyclone.png",
+    "logo": "media/logos/logo-apps.png",
     "message": "Please wait..."
   },
   "breakpoints": {

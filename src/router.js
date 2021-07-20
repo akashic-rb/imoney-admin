@@ -65,18 +65,6 @@ export default new Router({
           component: () => import("@/view/pages/private/user/Profile.vue"),
         },
         {
-          path: "/import",
-          name: "import",
-          component: () => import("@/view/pages/private/import/Layout.vue"),
-          children: [
-            {
-              path: "user",
-              name: "userData",
-              component: () => import("@/view/pages/private/import/Import.vue"),
-            },
-          ],
-        },
-        {
           path: "/employee",
           name: "employee",
           component: () => import("@/view/pages/private/employee/Layout.vue"),
