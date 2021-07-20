@@ -42,6 +42,7 @@ const mainConfig = function () {
       // webpack log message
       new WebpackMessages({
         name: themeName,
+        // eslint-disable-next-line no-console
         logger: (str) => console.log(`>> ${str}`),
       }),
       // create css file
