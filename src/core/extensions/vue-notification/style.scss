@@ -1,0 +1,24 @@
+.esm-vue-notification {
+  margin: 0 5px 5px;
+  padding: 12px;
+  font-size: 12px;
+  border-left: 3px solid #321c53;
+  color: #000;
+  background: #fff;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  &.info {
+    border-left-color: #5578eb;
+  }
+
+  &.success {
+    border-left-color: #0abb87;
+  }
+
+  &.warn {
+    border-left-color: #ffb822;
+  }
+
+  &.error {
+    border-left-color: #fd397a;
+  }
+}
