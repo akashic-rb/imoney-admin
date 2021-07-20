@@ -11,7 +11,7 @@ const actions = {
   async logout({ commit }) {
     commit("LOADING");
     try {
-      await API.post("/api/logout");
+      await API.post("/auth/logout");
     } catch (e) {
       commit("SET_ERROR", e);
       return false;

@@ -12,7 +12,7 @@ const actions = {
   async getUserInformationLoggedIn({ commit }) {
     commit("LOADING");
     try {
-      const res = await API.get("/api/user");
+      const res = await API.get("/auth/me");
       if (res.status === 200) {
         commit("SET_DATA", res.data.data);
         return true;

@@ -20,7 +20,7 @@
           mr-1
         "
       >
-        Hi,
+        Hello,
       </span>
       <span
         class="
@@ -30,12 +30,12 @@
           mr-3
         "
       >
-        {{ user.fullName }}
+        {{ user.name }}
       </span>
       <span class="symbol symbol-35 symbol-light-success">
         <img v-if="false" alt="Pic" :src="picture" />
         <span v-if="true" class="symbol-label font-size-h5 font-weight-bold">
-          {{ user.fullName[0] }}
+          {{ user.name[0] }}
         </span>
       </span>
     </div>
@@ -55,7 +55,7 @@
           pb-5
         "
       >
-        <h3 class="font-weight-bold m-0">User Profile</h3>
+        <h3 class="font-weight-bold m-0">Thông tin cá nhân</h3>
         <a
           href="#"
           class="btn btn-xs btn-icon btn-light btn-hover-primary"
@@ -85,9 +85,9 @@
                 text-dark-75 text-hover-primary
               "
             >
-              {{ user.fullName }}
+              {{ user.name }}
             </a>
-            <div class="text-muted mt-1">{{ user.position }}</div>
+            <div class="text-muted mt-1">{{ user.role.name }}</div>
             <div class="navi mt-2">
               <a href="#" class="navi-item">
                 <span class="navi-link p-0 pb-2">
@@ -105,7 +105,7 @@
               </a>
             </div>
             <button class="btn btn-light-primary btn-bold" @click="onLogout">
-              Sign out
+              Đăng xuất
             </button>
           </div>
         </div>
@@ -132,16 +132,16 @@
                 </div>
               </div>
               <div class="navi-text">
-                <div class="font-weight-bold">My Profile</div>
+                <div class="font-weight-bold">Thông tin cá nhân</div>
                 <div class="text-muted">
-                  Account settings and more
+                  Cài đặt
                   <span
                     class="
                       label label-light-danger label-inline
                       font-weight-bold
                     "
                   >
-                    update
+                    cập nhật
                   </span>
                 </div>
               </div>
@@ -206,6 +206,7 @@ export default {
   mounted() {
     // Init Quick User Panel
     KTLayoutQuickUser.init(this.$refs["kt_quick_user"]);
+    console.log(this.user);
   },
   methods: {
     ...mapActions("auth", ["purgeAuth"]),
@@ -223,7 +224,7 @@ export default {
     ...mapState("auth", ["user"]),
     picture() {
       return !this.user.imagePath
-        ? process.env.BASE_URL + "media/users/default.jpg"
+        ? "https://ui-avatars.com/api/?name=Admin"
         : process.env.VUE_APP_BASE_API_URL + "/storage/" + this.user.imagePath;
     },
   },

@@ -11,12 +11,13 @@ const actions = {
   async doAsync({ commit }, { email, password }) {
     commit("LOADING");
     try {
-      const res = await API.post("/api/login", {
+      const res = await API.post("/auth/login", {
         email,
         password,
       });
-      if (res.status === 200) {
-        const { user, token } = res.data;
+      if (res.data.is_success) {
+        let data = { user: res.data.user, token: res.data.token };
+        const { user, token } = data;
         commit("auth/SET_AUTH", { user, token }, { root: true });
         return true;
       }

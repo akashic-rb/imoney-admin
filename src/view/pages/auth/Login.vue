@@ -14,29 +14,15 @@
         py-5
         px-10
       "
-    >
-      <router-link
-        class="font-weight-bold font-size-3 ml-2"
-        :to="{ name: 'signUp' }"
-      >
-        Sign Up
-      </router-link>
-      <span class="font-weight-bold font-size-3 text-dark-60"> | </span>
-      <router-link
-        class="font-weight-bold font-size-3 ml-2"
-        :to="{ name: 'changePassword' }"
-      >
-        Change Password
-      </router-link>
-    </div>
+    ></div>
     <!--end::Content header-->
 
     <!--begin::Signin-->
     <div class="login-form login-signin">
       <div class="text-center mb-10 mb-lg-20">
-        <h3 class="font-size-h1">Sign In</h3>
+        <h3 class="font-size-h1">Đăng nhập</h3>
         <p class="text-muted font-weight-semi-bold">
-          Enter your username and password
+          Điền tài khoản và mật khẩu để đăng nhập
         </p>
       </div>
 
@@ -44,8 +30,7 @@
       <b-form class="form" @submit.stop.prevent="onSubmit">
         <div role="alert" class="alert alert-info">
           <div class="alert-text">
-            Use account <strong>admin@admin.com</strong> and password
-            <strong>password</strong> to continue.
+            Sử dụng một tài khoản <strong>admin</strong> để tiếp tục.
           </div>
         </div>
 
@@ -60,7 +45,7 @@
           ></b-form-input>
 
           <b-form-invalid-feedback id="email-live-feedback">
-            Email is required and a valid email address.
+            Email không được thiếu và phải hợp lệ
           </b-form-invalid-feedback>
         </b-form-group>
 
@@ -80,7 +65,7 @@
           ></b-form-input>
 
           <b-form-invalid-feedback id="password-live-feedback">
-            Password is required.
+            Mật khẩu là bắt buộc
           </b-form-invalid-feedback>
         </b-form-group>
 
@@ -99,13 +84,13 @@
             class="text-dark-60 text-hover-primary my-3 mr-2"
             id="kt_login_forgot"
           >
-            Forgot Password ?
+            Quên mật khẩu ?
           </router-link>
           <button
             ref="kt_login_signin_submit"
             class="btn btn-primary font-weight-bold px-9 py-4 my-3 font-size-3"
           >
-            Sign In
+            Đăng nhập
           </button>
         </div>
         <!--end::Action-->
@@ -136,8 +121,8 @@ export default {
       signIn: false,
       // Remove this dummy login info
       form: {
-        email: "admin@admin.com",
-        password: "password",
+        email: "admin@app.com",
+        password: "P@ssw0rd",
       },
     };
   },
@@ -193,7 +178,7 @@ export default {
       // dummy delay
       setTimeout(async () => {
         const isSucceeded = await this.loginAsync({ email, password });
-        if (isSucceeded) this.$router.push({ name: "dashboard" });
+        if (isSucceeded) this.$router.push({ path: "dashboard" });
         else
           this.$notify({
             title: "Login failed",

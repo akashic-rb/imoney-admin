@@ -1,6 +1,9 @@
 import Axios from "axios";
 import store from "@/core/store";
-const baseURL = "http://employeesmanagement.test";
+const baseURL =
+  process.env.NODE_ENV === "production"
+    ? "https://imoney-dev-2231.herokuapp.com/admin-api"
+    : "http://localhost:8000/admin-api";
 const api = Axios.create({ baseURL: baseURL });
 api.interceptors.request.use(
   (config) => {

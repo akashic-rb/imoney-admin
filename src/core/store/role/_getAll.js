@@ -10,19 +10,12 @@ const state = () => ({
 const getters = {};
 
 const actions = {
-  async getAllRoles({ commit }, { key, except, page, itemsPerPage }) {
+  async getAllRoles({ commit }) {
     commit("LOADING");
     try {
-      const res = await API.get("/api/roles", {
-        params: {
-          key,
-          except,
-          page,
-          itemsPerPage,
-        },
-      });
-      commit("SET_DATA", res.data.data.data);
-      commit("SET_TOTAL", res.data.data.total);
+      const res = await API.get("/roles");
+      commit("SET_DATA", res.data.data);
+      commit("SET_TOTAL", res.data);
       return res;
     } catch (e) {
       commit("SET_ERROR", e);

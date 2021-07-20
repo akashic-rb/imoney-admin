@@ -314,7 +314,7 @@ export default {
 
     avatar(item) {
       return !item.imagePath
-        ? process.env.BASE_URL + "media/users/default.jpg"
+        ? "https://ui-avatars.com/api/?name=Admin"
         : process.env.VUE_APP_BASE_API_URL + "/storage/" + item.imagePath;
     },
   },

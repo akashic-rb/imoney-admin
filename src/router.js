@@ -10,10 +10,6 @@ export default new Router({
     {
       path: "/",
       redirect: { name: "dashboard" },
-    },
-    {
-      path: "/admin",
-      redirect: { name: "dashboard" },
       component: () => import("@/view/layout/Layout"),
       beforeEnter: (to, from, next) => {
         if (!store.getters["auth/isLoggedIn"]) next({ name: "login" });
@@ -64,31 +60,6 @@ export default new Router({
           name: "myProfile",
           component: () => import("@/view/pages/private/user/Profile.vue"),
         },
-        {
-          path: "/employee",
-          name: "employee",
-          component: () => import("@/view/pages/private/employee/Layout.vue"),
-          children: [
-            {
-              path: "list",
-              name: "employeeListing",
-              component: () =>
-                import("@/view/pages/private/employee/Listing.vue"),
-            },
-            {
-              path: "create",
-              name: "employeeCreating",
-              component: () =>
-                import("@/view/pages/private/employee/Creating.vue"),
-            },
-            {
-              path: "edit/:id",
-              name: "employeeEditing",
-              component: () =>
-                import("@/view/pages/private/employee/Editing.vue"),
-            },
-          ],
-        },
       ],
     },
     {
@@ -104,7 +75,7 @@ export default new Router({
       ],
     },
     {
-      path: "/admin",
+      path: "/",
       component: () => import("@/view/pages/auth/Auth"),
       beforeEnter: (to, from, next) => {
         if (store.getters["auth/isLoggedIn"]) next({ name: "dashboard" });

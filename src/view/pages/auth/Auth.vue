@@ -32,7 +32,7 @@
             class="flex-column-fluid d-flex flex-column justify-content-center"
           >
             <h3 class="font-size-h1 mt-10 mb-5 text-black">
-              Welcome to Appscyclone !
+              Welcome to back to iMoney !
             </h3>
             <p class="font-weight-lighter text-black opacity-80">
               Where cool ideas dance
@@ -50,24 +50,14 @@
             "
           >
             <div class="opacity-70 font-weight-bold text-black">
-              © 2021 Appscyclone
+              © 2021 iMoney
             </div>
             <div class="d-flex">
-              <a
-                href="https://appscyclone.com/privacy-policy/"
-                class="text-black"
-                >Privacy</a
-              >
-              <a
-                href="https://appscyclone.com/terms-and-conditions/"
-                class="text-black ml-10"
+              <a href="/privacy-policy" class="text-black">Privacy</a>
+              <a href="/terms-and-conditions" class="text-black ml-10"
                 >Terms and Conditions</a
               >
-              <a
-                href="https://appscyclone.com/contact/"
-                class="text-black ml-10"
-                >Contact</a
-              >
+              <a href="/contact" class="text-black ml-10">Contact</a>
             </div>
           </div>
           <!--end: Aside footer for desktop -->
