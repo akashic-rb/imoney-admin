@@ -13,7 +13,7 @@ module.exports = {
       { "endOfLine": "auto" }
     ],
   },
-  ignorePattern: ["/src/assets"],
+  ignorePatterns: ["/src/assets"],
   parserOptions: {
     parser: "babel-eslint"
   }
