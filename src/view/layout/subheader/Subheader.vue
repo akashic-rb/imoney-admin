@@ -5,7 +5,12 @@
     id="kt_subheader"
   >
     <div
-      class="d-flex align-items-center justify-content-between flex-wrap flex-sm-nowrap"
+      class="
+        d-flex
+        align-items-center
+        justify-content-between
+        flex-wrap flex-sm-nowrap
+      "
       v-bind:class="{ 'container-fluid': widthFluid, container: !widthFluid }"
     >
       <div class="d-flex align-items-center flex-wrap mr-1">
@@ -13,7 +18,12 @@
           {{ title }}
         </h5>
         <ul
-          class="breadcrumb breadcrumb-transparent breadcrumb-dot font-weight-bold p-0 my-2"
+          class="
+            breadcrumb breadcrumb-transparent breadcrumb-dot
+            font-weight-bold
+            p-0
+            my-2
+          "
         >
           <li class="breadcrumb-item">
             <router-link :to="'/'" class="subheader-breadcrumbs-home">

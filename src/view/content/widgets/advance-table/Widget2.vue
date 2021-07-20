@@ -76,7 +76,13 @@
                 <td class="pl-0">
                   <a
                     href="#"
-                    class="text-dark-75 font-weight-bolder text-hover-primary mb-1 font-size-lg"
+                    class="
+                      text-dark-75
+                      font-weight-bolder
+                      text-hover-primary
+                      mb-1
+                      font-size-lg
+                    "
                   >
                     {{ item.text1 }}
                   </a>

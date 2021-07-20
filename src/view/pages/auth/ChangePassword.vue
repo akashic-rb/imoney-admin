@@ -2,7 +2,18 @@
   <div>
     <!--begin::Content header-->
     <div
-      class="position-absolute top-0 right-0 text-right mt-5 mb-15 mb-lg-0 flex-column-auto justify-content-center py-5 px-10"
+      class="
+        position-absolute
+        top-0
+        right-0
+        text-right
+        mt-5
+        mb-15 mb-lg-0
+        flex-column-auto
+        justify-content-center
+        py-5
+        px-10
+      "
     >
       <span class="font-weight-bold font-size-3 text-dark-60">
         Already have an account before ?
@@ -116,7 +127,13 @@
 
         <!--begin::Action-->
         <div
-          class="form-group d-flex flex-wrap justify-content-between align-items-center"
+          class="
+            form-group
+            d-flex
+            flex-wrap
+            justify-content-between
+            align-items-center
+          "
         >
           <router-link
             :to="{ name: 'forgotPassword' }"

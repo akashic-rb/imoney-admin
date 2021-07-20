@@ -1,14 +1,25 @@
 <template>
   <div class="d-flex flex-column flex-root">
     <div
-      class="error error-3 d-flex flex-row-fluid bgi-size-cover bgi-position-center"
+      class="
+        error error-3
+        d-flex
+        flex-row-fluid
+        bgi-size-cover bgi-position-center
+      "
       :style="{
         backgroundImage: `url(${backgroundImage})`,
       }"
     >
       <!-- begin:: Content -->
       <div
-        class="px-10 px-md-30 py-10 py-md-0 d-flex flex-column justify-content-md-center"
+        class="
+          px-10 px-md-30
+          py-10 py-md-0
+          d-flex
+          flex-column
+          justify-content-md-center
+        "
       >
         <h1 class="error-title text-stroke text-transparent">404</h1>
         <p class="display-4 font-weight-boldest text-white mb-12">

@@ -23,7 +23,10 @@
       <!--begin::Code example-->
       <div class="example-code mb-5">
         <ul
-          class="example-nav nav nav-tabs nav-bold nav-tabs-line nav-tabs-line-2x"
+          class="
+            example-nav
+            nav nav-tabs nav-bold nav-tabs-line nav-tabs-line-2x
+          "
           role="tablist"
           v-if="!hasGeneralCode && !hasSingleCodeType"
         >

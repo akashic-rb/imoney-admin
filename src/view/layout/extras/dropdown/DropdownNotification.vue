@@ -7,14 +7,29 @@
       <h4 class="d-flex flex-center rounded-top">
         <span class="text-white">User Notifications</span>
         <span
-          class="btn btn-text btn-success btn-sm font-weight-bold btn-font-md ml-2"
+          class="
+            btn btn-text btn-success btn-sm
+            font-weight-bold
+            btn-font-md
+            ml-2
+          "
         >
           23 new
         </span>
       </h4>
 
       <ul
-        class="nav nav-bold nav-tabs nav-tabs-line nav-tabs-line-3x nav-tabs-line-transparent-white nav-tabs-line-active-border-success mt-3 px-8"
+        class="
+          nav
+          nav-bold
+          nav-tabs
+          nav-tabs-line
+          nav-tabs-line-3x
+          nav-tabs-line-transparent-white
+          nav-tabs-line-active-border-success
+          mt-3
+          px-8
+        "
         role="tablist"
       >
         <li class="nav-item">

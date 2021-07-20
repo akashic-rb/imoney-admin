@@ -30,7 +30,12 @@
             <div class="d-flex flex-column flex-grow-1">
               <a
                 href="#"
-                class="font-weight-bold text-dark-75 text-hover-primary font-size-lg mb-1"
+                class="
+                  font-weight-bold
+                  text-dark-75 text-hover-primary
+                  font-size-lg
+                  mb-1
+                "
               >
                 {{ item.title }}
               </a>
@@ -66,22 +71,19 @@ export default {
       list: [
         {
           title: "Top Authors",
-          desc:
-            "A brief write up about the top Authors that fits within this section",
+          desc: "A brief write up about the top Authors that fits within this section",
           alt: "5 day ago",
           svg: "media/svg/misc/006-plurk.svg",
         },
         {
           title: "Popular Authors",
-          desc:
-            "A brief write up about the Popular Authors that fits within this section",
+          desc: "A brief write up about the Popular Authors that fits within this section",
           alt: "5 day ago",
           svg: "media/svg/misc/015-telegram.svg",
         },
         {
           title: "New Users",
-          desc:
-            "A brief write up about the New Users that fits within this section",
+          desc: "A brief write up about the New Users that fits within this section",
           alt: "5 day ago",
           svg: "media/svg/misc/014-kickstarter.svg",
         },

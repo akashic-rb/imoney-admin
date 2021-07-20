@@ -1,7 +1,12 @@
 <template>
   <div class="d-flex flex-column flex-root">
     <div
-      class="error error-6 d-flex flex-row-fluid bgi-size-cover bgi-position-center"
+      class="
+        error error-6
+        d-flex
+        flex-row-fluid
+        bgi-size-cover bgi-position-center
+      "
       :style="{
         backgroundImage: `url(${backgroundImage})`,
       }"

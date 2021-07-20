@@ -1,12 +1,23 @@
 <template>
   <div class="d-flex flex-column flex-root">
     <div
-      class="login login-1 login-signin-on d-flex flex-column flex-lg-row flex-row-fluid bg-white"
+      class="
+        login login-1 login-signin-on
+        d-flex
+        flex-column flex-lg-row flex-row-fluid
+        bg-white
+      "
       id="kt_login"
     >
       <!--begin::Aside-->
       <div
-        class="login-aside d-flex flex-row-auto bgi-size-cover bgi-no-repeat p-10 p-lg-15"
+        class="
+          login-aside
+          d-flex
+          flex-row-auto
+          bgi-size-cover bgi-no-repeat
+          p-10 p-lg-15
+        "
         :style="{ backgroundImage: `url(${backgroundImage})` }"
       >
         <!--begin: Aside Container -->
@@ -30,7 +41,13 @@
           <!--end: Aside content -->
           <!--begin: Aside footer for desktop -->
           <div
-            class="d-none flex-column-auto d-lg-flex justify-content-between mt-15"
+            class="
+              d-none
+              flex-column-auto
+              d-lg-flex
+              justify-content-between
+              mt-15
+            "
           >
             <div class="opacity-70 font-weight-bold text-black">
               © 2021 Appscyclone
@@ -61,7 +78,14 @@
 
       <!--begin::Content-->
       <div
-        class="flex-row-fluid d-flex flex-column position-relative p-7 overflow-hidden"
+        class="
+          flex-row-fluid
+          d-flex
+          flex-column
+          position-relative
+          p-7
+          overflow-hidden
+        "
       >
         <div class="d-flex flex-column-fluid flex-center mt-30 mt-lg-0">
           <router-view></router-view>

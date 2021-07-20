@@ -14,7 +14,13 @@
         <div
           v-if="item.type === 0"
           :key="i"
-          class="font-size-sm text-primary font-weight-bolder text-uppercase mb-2"
+          class="
+            font-size-sm
+            text-primary
+            font-weight-bolder
+            text-uppercase
+            mb-2
+          "
         >
           {{ item.text }}
         </div>

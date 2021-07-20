@@ -15,10 +15,25 @@
     >
       <!--begin::Header-->
       <div
-        class="offcanvas-header offcanvas-header-navs d-flex align-items-center justify-content-between mb-5"
+        class="
+          offcanvas-header offcanvas-header-navs
+          d-flex
+          align-items-center
+          justify-content-between
+          mb-5
+        "
       >
         <ul
-          class="nav nav-bold nav-tabs nav-tabs-line nav-tabs-line-3x nav-tabs-primary flex-grow-1 px-10"
+          class="
+            nav
+            nav-bold
+            nav-tabs
+            nav-tabs-line
+            nav-tabs-line-3x
+            nav-tabs-primary
+            flex-grow-1
+            px-10
+          "
           role="tablist"
         >
           <li class="nav-item">
@@ -97,7 +112,12 @@
                       <div class="d-flex flex-column flex-grow-1 mr-2">
                         <a
                           href="#"
-                          class="font-weight-bolder text-dark-75 text-hover-primary font-size-lg mb-1"
+                          class="
+                            font-weight-bolder
+                            text-dark-75 text-hover-primary
+                            font-size-lg
+                            mb-1
+                          "
                         >
                           {{ item.title }}
                         </a>
@@ -106,7 +126,13 @@
                         </span>
                       </div>
                       <span
-                        class="btn btn-sm btn-light font-weight-bolder py-1 my-lg-0 my-2 text-dark-50"
+                        class="
+                          btn btn-sm btn-light
+                          font-weight-bolder
+                          py-1
+                          my-lg-0 my-2
+                          text-dark-50
+                        "
                       >
                         {{ item.alt }}
                       </span>
@@ -137,7 +163,12 @@
                       <div class="d-flex flex-column flex-grow-1 mr-2">
                         <a
                           href="#"
-                          class="font-weight-normal text-dark-75 text-hover-primary font-size-lg mb-1"
+                          class="
+                            font-weight-normal
+                            text-dark-75 text-hover-primary
+                            font-size-lg
+                            mb-1
+                          "
                         >
                           {{ item.title }}
                         </a>

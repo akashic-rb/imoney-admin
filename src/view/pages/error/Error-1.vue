@@ -1,7 +1,12 @@
 <template>
   <div class="d-flex flex-column flex-root">
     <div
-      class="d-flex flex-row-fluid flex-column bgi-size-cover bgi-position-center bgi-no-repeat p-10 p-sm-30"
+      class="
+        d-flex
+        flex-row-fluid flex-column
+        bgi-size-cover bgi-position-center bgi-no-repeat
+        p-10 p-sm-30
+      "
       :style="{
         backgroundImage: `url(${backgroundImage})`,
       }"

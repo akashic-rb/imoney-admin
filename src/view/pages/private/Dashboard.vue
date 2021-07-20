@@ -4,7 +4,12 @@
       <div class="col-xl-8">
         <!--begin::Charts Widget 2-->
         <div
-          class="card card-custom bg-gray-100 gutter-b card-stretch card-shadowless"
+          class="
+            card card-custom
+            bg-gray-100
+            gutter-b
+            card-stretch card-shadowless
+          "
         >
           <!--begin::Header-->
           <div class="card-header h-auto border-0">
@@ -57,7 +62,12 @@
       <div class="col-xl-4">
         <!--begin::List Widget 2-->
         <div
-          class="card card-custom bg-light-success gutter-b card-stretch card-shadowless"
+          class="
+            card card-custom
+            bg-light-success
+            gutter-b
+            card-stretch card-shadowless
+          "
         >
           <!--begin::Header-->
           <div class="card-header border-0">
@@ -104,7 +114,10 @@
                         <span class="navi-text">Users</span>
                         <span class="navi-label">
                           <span
-                            class="label label-light-danger label-rounded font-weight-bold"
+                            class="
+                              label label-light-danger label-rounded
+                              font-weight-bold
+                            "
                             >3</span
                           >
                         </span>

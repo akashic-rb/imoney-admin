@@ -23,7 +23,12 @@
           <div class="timeline-item align-items-start" v-bind:key="i">
             <!--begin::Label-->
             <div
-              class="timeline-label font-weight-bolder text-dark-75 font-size-lg"
+              class="
+                timeline-label
+                font-weight-bolder
+                text-dark-75
+                font-size-lg
+              "
             >
               {{ item.time }}
             </div>
@@ -37,7 +42,12 @@
 
             <!--begin::Text-->
             <div
-              class="font-weight-mormal font-size-sm timeline-content text-muted pl-3"
+              class="
+                font-weight-mormal font-size-sm
+                timeline-content
+                text-muted
+                pl-3
+              "
             >
               <span
                 v-bind:class="{
@@ -126,8 +136,7 @@ export default {
         },
         {
           time: "21:07",
-          desc:
-            "Company BBQ to celebrate the last quater achievements and goals.",
+          desc: "Company BBQ to celebrate the last quater achievements and goals.",
           badge: "fa fa-genderless text-danger",
         },
         {

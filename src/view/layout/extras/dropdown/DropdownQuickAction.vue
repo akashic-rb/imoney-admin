@@ -2,7 +2,13 @@
   <div>
     <!--begin::Header -->
     <div
-      class="d-flex flex-column flex-center py-10 bgi-size-cover bgi-no-repeat rounded-top"
+      class="
+        d-flex
+        flex-column flex-center
+        py-10
+        bgi-size-cover bgi-no-repeat
+        rounded-top
+      "
       :style="{ backgroundImage: `url(${backgroundImage})` }"
     >
       <h4 class="text-white font-weight-bold">Quick Actions</h4>
@@ -19,7 +25,14 @@
         <div class="col-6" v-bind:key="i">
           <router-link
             to="builder"
-            class="d-block py-10 px-5 text-center bg-hover-light border-right border-bottom"
+            class="
+              d-block
+              py-10
+              px-5
+              text-center
+              bg-hover-light
+              border-right border-bottom
+            "
           >
             <span class="svg-icon svg-icon-3x svg-icon-success">
               <!--begin::Svg Icon-->
@@ -27,7 +40,13 @@
               <!--end::Svg Icon-->
             </span>
             <span
-              class="d-block text-dark-75 font-weight-bold font-size-h6 mt-2 mb-1"
+              class="
+                d-block
+                text-dark-75
+                font-weight-bold font-size-h6
+                mt-2
+                mb-1
+              "
             >
               {{ item.title }}
             </span>

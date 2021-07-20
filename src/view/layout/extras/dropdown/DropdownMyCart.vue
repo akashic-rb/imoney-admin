@@ -2,7 +2,14 @@
   <form>
     <!--begin::Header-->
     <div
-      class="d-flex align-items-center py-10 px-8 bgi-size-cover bgi-no-repeat rounded-top"
+      class="
+        d-flex
+        align-items-center
+        py-10
+        px-8
+        bgi-size-cover bgi-no-repeat
+        rounded-top
+      "
       :style="{ backgroundImage: `url(${backgroundImage})` }"
     >
       <span class="btn btn-md btn-icon bg-white-o-15 mr-4">
@@ -27,7 +34,12 @@
             <div class="d-flex flex-column mr-2">
               <a
                 href="#"
-                class="font-weight-bold text-dark-75 font-size-lg text-hover-primary"
+                class="
+                  font-weight-bold
+                  text-dark-75
+                  font-size-lg
+                  text-hover-primary
+                "
               >
                 {{ item.title }}
               </a>

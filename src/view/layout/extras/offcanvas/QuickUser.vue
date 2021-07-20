@@ -1,16 +1,34 @@
 <template>
   <div class="topbar-item">
     <div
-      class="btn btn-icon w-auto btn-clean d-flex align-items-center btn-lg px-2"
+      class="
+        btn btn-icon
+        w-auto
+        btn-clean
+        d-flex
+        align-items-center
+        btn-lg
+        px-2
+      "
       id="kt_quick_user_toggle"
     >
       <span
-        class="text-muted font-weight-bold font-size-base d-none d-md-inline mr-1"
+        class="
+          text-muted
+          font-weight-bold font-size-base
+          d-none d-md-inline
+          mr-1
+        "
       >
         Hi,
       </span>
       <span
-        class="text-dark-50 font-weight-bolder font-size-base d-none d-md-inline mr-3"
+        class="
+          text-dark-50
+          font-weight-bolder font-size-base
+          d-none d-md-inline
+          mr-3
+        "
       >
         {{ user.fullName }}
       </span>
@@ -29,7 +47,13 @@
     >
       <!--begin::Header-->
       <div
-        class="offcanvas-header d-flex align-items-center justify-content-between pb-5"
+        class="
+          offcanvas-header
+          d-flex
+          align-items-center
+          justify-content-between
+          pb-5
+        "
       >
         <h3 class="font-weight-bold m-0">User Profile</h3>
         <a
@@ -56,7 +80,10 @@
           <div class="d-flex flex-column">
             <a
               href=""
-              class="font-weight-bold font-size-h5 text-dark-75 text-hover-primary"
+              class="
+                font-weight-bold font-size-h5
+                text-dark-75 text-hover-primary
+              "
             >
               {{ user.fullName }}
             </a>
@@ -109,7 +136,10 @@
                 <div class="text-muted">
                   Account settings and more
                   <span
-                    class="label label-light-danger label-inline font-weight-bold"
+                    class="
+                      label label-light-danger label-inline
+                      font-weight-bold
+                    "
                   >
                     update
                   </span>

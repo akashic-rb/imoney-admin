@@ -9,7 +9,7 @@ export default new Router({
   routes: [
     {
       path: "/",
-      component: () => import("@/view/pages/public/Home.vue"),
+      redirect: { name: "dashboard" },
     },
     {
       path: "/admin",

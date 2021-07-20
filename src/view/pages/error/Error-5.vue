@@ -1,14 +1,25 @@
 <template>
   <div class="d-flex flex-column flex-root">
     <div
-      class="error error-5 d-flex flex-row-fluid bgi-size-cover bgi-position-center"
+      class="
+        error error-5
+        d-flex
+        flex-row-fluid
+        bgi-size-cover bgi-position-center
+      "
       :style="{
         backgroundImage: `url(${backgroundImage})`,
       }"
     >
       <!-- begin:: Content -->
       <div
-        class="container d-flex flex-row-fluid flex-column justify-content-md-center p-12"
+        class="
+          container
+          d-flex
+          flex-row-fluid flex-column
+          justify-content-md-center
+          p-12
+        "
       >
         <h1
           class="error-title font-weight-boldest text-info mt-10 mt-md-0 mb-12"

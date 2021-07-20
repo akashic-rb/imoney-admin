@@ -4,7 +4,13 @@
     <!--begin::Body-->
     <div class="card-body d-flex flex-column p-0">
       <div
-        class="d-flex align-items-center justify-content-between card-spacer flex-grow-1"
+        class="
+          d-flex
+          align-items-center
+          justify-content-between
+          card-spacer
+          flex-grow-1
+        "
       >
         <span class="symbol symbol-circle symbol-50 symbol-light-primary mr-2">
           <span class="symbol-label">

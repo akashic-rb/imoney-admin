@@ -6,7 +6,9 @@
         <router-link
           href="#"
           :to="{ name: 'builder' }"
-          class="btn btn-sm btn-icon btn-bg-light btn-text-primary btn-hover-primary"
+          class="
+            btn btn-sm btn-icon btn-bg-light btn-text-primary btn-hover-primary
+          "
         >
           <i class="flaticon2-gear"></i>
         </router-link>
@@ -14,7 +16,9 @@
       <li v-b-tooltip.hover.left="'Documentation'" class="nav-item">
         <a
           href="https://keenthemes.com/metronic/?page=docs"
-          class="btn btn-sm btn-icon btn-bg-light btn-text-warning btn-hover-warning"
+          class="
+            btn btn-sm btn-icon btn-bg-light btn-text-warning btn-hover-warning
+          "
           target="_blank"
         >
           <i class="flaticon2-telegram-logo"></i>
