@@ -206,7 +206,6 @@ export default {
   mounted() {
     // Init Quick User Panel
     KTLayoutQuickUser.init(this.$refs["kt_quick_user"]);
-    console.log(this.user);
   },
   methods: {
     ...mapActions("auth", ["purgeAuth"]),
