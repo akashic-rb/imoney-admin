@@ -13,13 +13,10 @@
         </div>
         <div class="col-md-6">
           <div class="profile-head">
-            <h5>{{ user.profile.firstName }} {{ user.profile.lastName }}</h5>
-            <h6>{{ user.status }}</h6>
+            <h5>{{ user.name }}</h5>
             <p class="profile-rating">
               Role :
-              <span v-for="role in user.roles" :key="role.id"
-                >{{ role.name }}
-              </span>
+              <span>{{ user.role.name }}</span>
             </p>
             <br /><br />
             <ul class="nav nav-tabs" id="myTab" role="tablist">

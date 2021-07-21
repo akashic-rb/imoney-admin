@@ -11,7 +11,7 @@ const actions = {
   async create({ commit }, formData) {
     commit("LOADING");
     try {
-      const res = await API.post("/api/users", formData);
+      const res = await API.post("/users", formData);
       if (res.status === 200) {
         return true;
       }

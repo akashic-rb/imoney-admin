@@ -11,7 +11,7 @@ const actions = {
   async destroy({ commit }, id) {
     commit("LOADING");
     try {
-      const res = await API.delete("/api/users/" + id);
+      const res = await API.delete("/users/" + id);
       if (res.status === 200) {
         return true;
       }

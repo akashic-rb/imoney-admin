@@ -11,26 +11,7 @@
     >
       <template v-slot:top>
         <v-toolbar flat>
-          <v-toolbar-title>Users Listing</v-toolbar-title>
-          <v-divider class="mx-4" inset vertical></v-divider>
-          <v-row class="mt-4">
-            <v-col cols="12" sm="8" md="6"
-              ><v-autocomplete
-                v-model="team"
-                outlined
-                auto-select-first
-                chips
-                clearable
-                deletable-chips
-                dense
-                prepend-inner-icon="mdi-filter"
-                placeholder="Filter by team"
-                item-value="id"
-                item-text="name"
-                :items="teamItems"
-                @change="filterAndSearchUser"
-              ></v-autocomplete></v-col
-          ></v-row>
+          <v-toolbar-title>Danh sách người dùng</v-toolbar-title>
 
           <v-spacer></v-spacer>
 
@@ -54,60 +35,6 @@
               ><v-icon class="mr-1">mdi-account-plus</v-icon>
             </v-btn>
           </router-link>
-
-          <v-dialog v-model="dialog" width="500">
-            <template v-slot:activator="{ on, attrs }">
-              <v-btn icon v-bind="attrs" v-on="on">
-                <v-icon>mdi-import</v-icon>
-              </v-btn>
-            </template>
-
-            <v-card>
-              <v-card-title class="text-h5 grey lighten-2">
-                Choose file to import (Except : <i>.xls, .xlxs, .csv</i> )
-              </v-card-title>
-
-              <v-card-text>
-                <v-row>
-                  <v-col md="4">
-                    <v-file-input
-                      truncate-length="20"
-                      accept=".xlsx, .xls, .csv"
-                      @change="onFileChange"
-                      :disabled="uploading"
-                    ></v-file-input>
-                  </v-col>
-                  <v-col md="8">
-                    <v-btn
-                      class="mt-2"
-                      @click="importDataUser"
-                      :disabled="uploading"
-                      >Import
-                    </v-btn>
-                  </v-col>
-                </v-row>
-
-                <v-progress-linear
-                  indeterminate
-                  color="teal"
-                  v-show="uploading"
-                ></v-progress-linear>
-                <v-alert type="success" v-if="message" dismissible>
-                  {{ message.success }}
-                </v-alert>
-                <v-alert type="error" v-if="error" dismissible>
-                  {{ error }}
-                </v-alert>
-              </v-card-text>
-
-              <v-divider></v-divider>
-
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn text @click="dialog = false">Cancel</v-btn>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
 
           <v-menu left bottom>
             <template v-slot:activator="{ on, attrs }">
@@ -164,17 +91,23 @@
         </v-dialog>
       </template>
 
-      <template v-slot:[`item.fullName`]="{ item }">
-        {{ item.profile.firstName }} {{ item.profile.lastName }}
+      <template v-slot:[`item.name`]="{ item }">
+        {{ item.name }}
       </template>
-      <template v-slot:[`item.dob`]="{ item }">
-        {{ item.profile.dob }}
+      <template v-slot:[`item.email`]="{ item }">
+        {{ item.email }}
       </template>
-      <template v-slot:[`item.gender`]="{ item }">
-        {{ item.profile.gender }}
+      <template v-slot:[`item.username`]="{ item }">
+        {{ item.username }}
       </template>
-      <template v-slot:[`item.team`]="{ item }">
-        {{ item.team.name }}
+      <template v-slot:[`item.role`]="{ item }">
+        {{ item.role.name }}
+      </template>
+      <template v-slot:[`item.createDate`]="{ item }">
+        {{ formatDate(item.created_at) }}
+      </template>
+      <template v-slot:[`item.verified`]="{ item }">
+        {{ formatDate(item.email_verified_at) }}
       </template>
       <template v-slot:[`item.actions`]="{ item }">
         <v-icon small class="mr-2" @click="editItem(item)" color="teal">
@@ -201,10 +134,9 @@
 </style>
 <script>
 import { mapActions, mapState } from "vuex";
-import { TEAM } from "@/utils/constants";
-import { convertKeyHaveTwoChars } from "@/helper/validation";
 import JsonCSV from "vue-json-csv/src/JsonCSV";
 import JsonExcel from "vue-json-excel";
+import moment from "moment";
 
 export default {
   data: () => ({
@@ -214,16 +146,15 @@ export default {
 
     headers: [
       {
-        text: "Fullname",
+        text: "Tên",
         align: "start",
-        value: "fullName",
+        value: "name",
       },
-      { text: "DOB", value: "dob" },
-      { text: "Gender", value: "gender", sortable: false },
       { text: "Email", value: "email" },
-      { text: "Phone", value: "phone" },
-      { text: "Status", value: "status", sortable: false },
-      { text: "Team", value: "team" },
+      { text: "Tên đăng nhập", value: "username" },
+      { text: "Role", value: "role" },
+      { text: "Ngày tạo", value: "createDate" },
+      { text: "Xác thực", value: "verified" },
       { text: "Actions", value: "actions", sortable: false },
     ],
 
@@ -244,12 +175,6 @@ export default {
     dataExport: [],
 
     dialog: false,
-
-    file: null,
-
-    uploading: false,
-
-    success: false,
   }),
   components: {
     JsonCSV,
@@ -274,19 +199,12 @@ export default {
       error: "error",
       destroyLoading: "loading",
     }),
-    ...mapState("user/importData", ["error", "loading", "message"]),
-    teamItems() {
-      return Object.keys(TEAM).map((key) => ({
-        id: TEAM[key],
-        name: convertKeyHaveTwoChars(key),
-      }));
-    },
   },
 
   mounted() {
     this.setBreadcrumb([
       { title: "User", route: "userListing" },
-      { title: "List" },
+      { title: "Danh sách" },
     ]);
   },
 
@@ -294,7 +212,6 @@ export default {
     ...mapActions("breadcrumbs", ["setBreadcrumb"]),
     ...mapActions("user/getAll", ["getAll"]),
     ...mapActions("user/destroy", ["destroy"]),
-    ...mapActions("user/importData", ["importData"]),
 
     async getDataFromApi() {
       this.loading = true;
@@ -311,28 +228,14 @@ export default {
       });
       const temp = [];
       this.data.forEach(function (item) {
-        let skills = "";
-        let roles = "";
-        item.skills.forEach(function (skill) {
-          skills += skill.name + ", ";
-        });
-        item.roles.forEach(function (role) {
-          roles += role.name + ", ";
-        });
         temp.push({
-          Id: item.id,
-          Firstname: item.profile.firstName,
-          Lastname: item.profile.lastName,
-          Dob: item.profile.dob,
-          Gender: item.profile.gender,
+          Id: item.user_id,
+          Name: item.name,
           Email: item.email,
-          Phone: item.phone,
-          Status: item.status,
-          StartDate: item.startDate,
-          EndDate: item.endDate,
-          Team: item.team.name,
-          Skills: skills,
-          Roles: roles,
+          Username: item.username,
+          Role: item.role.name,
+          CreateDate: item.created_at,
+          EmailVerifiedAt: item.email_verified_at,
         });
       });
       this.dataExport = temp;
@@ -342,7 +245,7 @@ export default {
     editItem(item) {
       this.$router.push({
         name: "userEditing",
-        params: { id: item.id, page: this.options.page },
+        params: { id: item.user_id, page: this.options.page },
       });
     },
 
@@ -356,16 +259,16 @@ export default {
       this.deleting = true;
 
       setTimeout(async () => {
-        const isSucceeded = await this.destroy(this.user.id);
+        const isSucceeded = await this.destroy(this.user.user_id);
         if (isSucceeded) {
           this.$notify({
-            title: "Delete user successfully!",
+            title: "Xóa thành công",
             type: "success",
           });
           this.data.splice(this.deletedIndex, 1);
         } else {
           this.$notify({
-            title: "Delete user failed!",
+            title: "Đã có lỗi xảy ra! Thử lại sau",
             text: this.error,
             type: "error",
           });
@@ -390,19 +293,10 @@ export default {
       this.getDataFromApi();
     },
 
-    onFileChange(file) {
-      this.file = file;
-    },
-
-    async importDataUser() {
-      this.uploading = true;
-      const formData = new FormData();
-      formData.append("file", this.file);
-      const isSucceeded = await this.importData(formData);
-      if (isSucceeded) {
-        this.success = true;
-      }
-      this.uploading = false;
+    formatDate(date) {
+      return date === null
+        ? null
+        : moment(String(date)).format("DD/MM/YYYY hh:mm");
     },
   },
 };

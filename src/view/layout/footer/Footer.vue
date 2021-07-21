@@ -9,34 +9,16 @@
         <span class="text-muted font-weight-bold mr-2">
           2021 &nbsp;&copy;&nbsp;
         </span>
-        <a
-          href="https://appscyclone.com/"
-          target="_blank"
-          class="text-dark-75 text-hover-primary"
-        >
-          Appscyclone
+        <a href="/" target="_blank" class="text-dark-75 text-hover-primary">
+          iMoney
         </a>
       </div>
       <div class="nav nav-dark">
-        <a
-          href="https://appscyclone.com/aboutus/"
-          target="_blank"
-          class="nav-link pr-3 pl-0"
-        >
+        <a href="/aboutus/" target="_blank" class="nav-link pr-3 pl-0">
           About
         </a>
-        <a
-          href="https://appscyclone.com/services/"
-          target="_blank"
-          class="nav-link px-3"
-        >
-          Services
-        </a>
-        <a
-          href="https://appscyclone.com/contact/"
-          target="_blank"
-          class="nav-link pl-3 pr-0"
-        >
+        <a href="/services" target="_blank" class="nav-link px-3"> Services </a>
+        <a href="/contact" target="_blank" class="nav-link pl-3 pr-0">
           Contact
         </a>
       </div>

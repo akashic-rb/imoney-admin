@@ -11,7 +11,7 @@ const actions = {
   async update({ commit }, { id, formData }) {
     commit("LOADING");
     try {
-      const res = await API.post("/api/users/" + id, formData);
+      const res = await API.put("/users/" + id, formData);
       if (res.status === 200) {
         return true;
       }

@@ -11,24 +11,10 @@ const state = () => ({
 const getters = {};
 
 const actions = {
-  async getAll(
-    { commit },
-    { key, team, status, end, sortBy, sortDesc, page, itemsPerPage }
-  ) {
+  async getAll({ commit }) {
     commit("LOADING");
     try {
-      const res = await API.get("/api/users", {
-        params: {
-          key,
-          team,
-          status,
-          end,
-          sortBy,
-          sortDesc,
-          page,
-          itemsPerPage,
-        },
-      });
+      const res = await API.get("/users");
       commit("SET_DATA", res.data.data.data);
       commit("SET_TOTAL", res.data.data.total);
       commit("SET_TOTALPAGE", res.data.data.last_page);

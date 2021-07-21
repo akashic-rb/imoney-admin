@@ -12,7 +12,7 @@ const actions = {
   async get({ commit }, id) {
     commit("LOADING");
     try {
-      const res = await API.get("/api/users/" + id);
+      const res = await API.get("/users/" + id);
       if (res.status === 200) {
         commit("SET_DATA", res.data.data);
         return true;
