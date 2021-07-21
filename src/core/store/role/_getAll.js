@@ -14,8 +14,8 @@ const actions = {
     commit("LOADING");
     try {
       const res = await API.get("/roles");
-      commit("SET_DATA", res.data.data);
-      commit("SET_TOTAL", res.data);
+      commit("SET_DATA", res.data.data.data);
+      commit("SET_TOTAL", 3);
       return res;
     } catch (e) {
       commit("SET_ERROR", e);
