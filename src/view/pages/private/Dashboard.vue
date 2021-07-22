@@ -17,31 +17,16 @@
             <div class="card-title py-5">
               <h3 class="card-label">
                 <span class="d-block text-dark font-weight-bolder"
-                  >Total Employees : {{ number }}</span
+                  >Tổng user : {{ getAllTotal }}</span
                 >
-                <span class="d-block text-dark-50 mt-2 font-size-sm">{{
-                  new Date().toISOString().substr(0, 10)
-                }}</span>
+                <span class="d-block text-dark-50 mt-2 font-size-sm"
+                  >Cập nhật lần cuối:
+                  {{ new Date().toISOString().substr(0, 10) }}</span
+                >
               </h3>
             </div>
             <v-spacer></v-spacer>
-            <v-row class="mt-4">
-              <v-col md="8"
-                ><v-autocomplete
-                  v-model="team"
-                  outlined
-                  auto-select-first
-                  chips
-                  clearable
-                  deletable-chips
-                  dense
-                  prepend-inner-icon="mdi-filter"
-                  placeholder="Filter by team"
-                  item-value="id"
-                  item-text="name"
-                  :items="teamItems"
-                ></v-autocomplete></v-col
-            ></v-row>
+            <v-row class="mt-4"> <v-col md="8"></v-col></v-row>
             <!--end::Title-->
           </div>
           <!--end::Header-->
@@ -196,8 +181,6 @@
 <script>
 import { mapActions, mapState } from "vuex";
 import UserChart from "./chart/UserChart";
-import { TEAM } from "@/utils/constants";
-import { convertKeyHaveTwoChars } from "@/helper/validation";
 
 export default {
   name: "dashboard",
@@ -221,9 +204,6 @@ export default {
     options: {
       page: 1,
     },
-
-    team: "",
-    number: 0,
   }),
   components: {
     UserChart,
@@ -238,17 +218,12 @@ export default {
   },
 
   mounted() {
-    this.setBreadcrumb([{ title: "Dashboard" }]);
+    this.setBreadcrumb([{ title: "Tổng quan" }]);
     this.setChart();
     this.getUserEndAtThisMonth();
   },
 
   computed: {
-    ...mapState("user/groupBy", {
-      groupByLoading: "loading",
-      groupByData: "data",
-      groupByError: "error",
-    }),
     ...mapState("user/getAll", {
       getAllLoading: "loading",
       getAllData: "data",
@@ -256,12 +231,6 @@ export default {
       getAllError: "error",
       lastPage: "lastPage",
     }),
-    teamItems() {
-      return Object.keys(TEAM).map((key) => ({
-        id: TEAM[key],
-        name: convertKeyHaveTwoChars(key),
-      }));
-    },
   },
 
   methods: {
@@ -277,21 +246,14 @@ export default {
         team: this.team,
       });
 
-      const labels = ["Internship", "Transit", "Probationary", "Official"];
+      const labels = ["Admin", "Premium User", "User"];
       const total = [0, 0, 0, 0];
-
-      let number = 0;
-      this.groupByData.forEach(function (element) {
-        total[element.status - 1] = element.total;
-        number += element.total;
-      });
-      this.number = number;
 
       this.chartData = {
         labels: labels,
         datasets: [
           {
-            label: "Status",
+            label: "Số lượng",
             backgroundColor: "#8FD1B7",
             data: total,
           },
