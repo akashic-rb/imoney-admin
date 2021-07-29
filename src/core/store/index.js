@@ -9,6 +9,7 @@ import config from "./config";
 import breadcrumbs from "./breadcrumbs";
 import user from "./user";
 import role from "./role";
+import profile from "./profile";
 
 Vue.use(Vuex);
 
@@ -27,6 +28,7 @@ export default new Vuex.Store({
     breadcrumbs,
     user,
     role,
+    profile,
   },
   plugins: [vuexPersist.plugin],
 });

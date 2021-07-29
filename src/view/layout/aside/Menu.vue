@@ -33,7 +33,7 @@
     >
       <a href="#" class="menu-link menu-toggle">
         <i class="menu-icon fas fa-user-secret"></i>
-        <span class="menu-text">User</span>
+        <span class="menu-text">Người dùng</span>
         <i class="menu-arrow"></i>
       </a>
       <div class="menu-submenu">
@@ -41,7 +41,7 @@
         <ul class="menu-subnav">
           <li aria-haspopup="true" class="menu-item menu-item-parent">
             <span class="menu-link">
-              <span class="menu-text">User</span>
+              <span class="menu-text">Người dùng</span>
             </span>
           </li>
 

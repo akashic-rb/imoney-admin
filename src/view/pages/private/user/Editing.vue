@@ -137,7 +137,7 @@ export default {
 
   async mounted() {
     this.setBreadcrumb([
-      { title: "User", route: "userListing" },
+      { title: "Người dùng", route: "userListing" },
       { title: "Chỉnh sửa" },
     ]);
     this.getUser();
