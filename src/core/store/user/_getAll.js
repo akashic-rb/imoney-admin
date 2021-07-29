@@ -26,17 +26,6 @@ const actions = {
       commit("LOADED");
     }
   },
-  async filterByName({ commit }, array, keyword) {
-    const filtered = array.filter((item) => {
-      console.log(keyword);
-      item.name.includes(keyword);
-    });
-    if (filtered.length > 0) {
-      commit("SET_DATA", filtered);
-    } else {
-      commit("SET_DATA", []);
-    }
-  },
 };
 
 const mutations = {

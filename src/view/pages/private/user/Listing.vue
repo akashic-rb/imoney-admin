@@ -195,7 +195,7 @@ export default {
 
   methods: {
     ...mapActions("breadcrumbs", ["setBreadcrumb"]),
-    ...mapActions("user/getAll", ["getAll", "filterByName"]),
+    ...mapActions("user/getAll", ["getAll"]),
     ...mapActions("user/destroy", ["destroy"]),
 
     async getDataFromApi() {
