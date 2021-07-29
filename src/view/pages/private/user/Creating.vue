@@ -32,7 +32,7 @@
             <v-col cols="12" md="6">
               <v-text-field
                 v-model="name"
-                :rules="firstNameRules"
+                :rules="nameRules"
                 label="Tên"
                 required
               ></v-text-field>
@@ -40,10 +40,22 @@
             <v-col cols="12" md="6">
               <v-text-field
                 v-model="username"
-                :rules="username"
                 label="Tên đăng nhập"
                 required
               ></v-text-field>
+            </v-col>
+          </v-row>
+        </v-card-text>
+        <v-card-text>
+          <v-row>
+            <v-col cols="12" md="6">
+              <v-select
+                v-model="role"
+                :items="rolesList"
+                label="Chọn role"
+                item-text="name"
+                item-value="role_id"
+              ></v-select>
             </v-col>
           </v-row>
         </v-card-text>
@@ -88,7 +100,11 @@ export default {
     password: "",
     passwordRules: [
       (v) => !!v || "Mật khẩu là bắt buộc",
-      (v) => (v && v.length >= 6) || "Mật khẩu quá ngắn",
+      (v) =>
+        /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/i.test(
+          v
+        ) ||
+        "Mật khẩu phải có 1 ký tự đặc biệt, 1 chữ in hoa, 1 số, ít nhất 8 ký tự",
     ],
 
     name: "",
@@ -112,7 +128,7 @@ export default {
 
   mounted() {
     this.setBreadcrumb([
-      { title: "User", route: "userListing" },
+      { title: "Người dùng", route: "userListing" },
       { title: "Tạo mới" },
     ]);
     this.getRolesList();
@@ -126,15 +142,14 @@ export default {
   methods: {
     ...mapActions("breadcrumbs", ["setBreadcrumb"]),
     ...mapActions("user/create", ["create"]),
+    ...mapActions("role/getAll", ["getAllRoles"]),
 
-    async getRolesList() {},
+    async getRolesList() {
+      this.getAllRoles();
+    },
 
     saveCreate() {
       this.valid = this.$refs.form.validate();
-
-      if (typeof this.roles[0] === "object") {
-        this.roles = this.roles.map((i) => i.id);
-      }
 
       if (this.valid) {
         this.saving = true;
@@ -143,8 +158,7 @@ export default {
         formData.append("email", this.email);
         formData.append("password", this.password);
         formData.append("name", this.name);
-        formData.append("role_id", this.roles);
-
+        formData.append("role_id", this.role);
         setTimeout(async () => {
           const isSucceeded = await this.create(formData);
           if (isSucceeded) {

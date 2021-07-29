@@ -17,31 +17,14 @@
             <div class="card-title py-5">
               <h3 class="card-label">
                 <span class="d-block text-dark font-weight-bolder"
-                  >Total Employees : {{ number }}</span
+                  >Tổng người dùng : {{ number }}</span
                 >
-                <span class="d-block text-dark-50 mt-2 font-size-sm">{{
-                  new Date().toISOString().substr(0, 10)
-                }}</span>
+                <span class="d-block text-dark-50 mt-2 font-size-sm"
+                  >Cập nhật: {{ new Date().toISOString().substr(0, 10) }}</span
+                >
               </h3>
             </div>
             <v-spacer></v-spacer>
-            <v-row class="mt-4">
-              <v-col md="8"
-                ><v-autocomplete
-                  v-model="team"
-                  outlined
-                  auto-select-first
-                  chips
-                  clearable
-                  deletable-chips
-                  dense
-                  prepend-inner-icon="mdi-filter"
-                  placeholder="Filter by team"
-                  item-value="id"
-                  item-text="name"
-                  :items="teamItems"
-                ></v-autocomplete></v-col
-            ></v-row>
             <!--end::Title-->
           </div>
           <!--end::Header-->
@@ -72,7 +55,7 @@
           <!--begin::Header-->
           <div class="card-header border-0">
             <h3 class="card-title font-weight-bolder text-success">
-              Employees end at this month : {{ getAllTotal }}
+              Số người dùng đã đăng ký : {{ getAllTotal }}
             </h3>
             <div class="card-toolbar">
               <div class="dropdown dropdown-inline">
@@ -159,7 +142,7 @@
                 <div class="symbol-label">
                   <img
                     :src="avatar(item)"
-                    class="h-100 align-self-end rounded-circle"
+                    class="h-100 align-self-end rounded"
                     alt=""
                   />
                 </div>
@@ -170,9 +153,8 @@
                 <a
                   @click="detailUser(item)"
                   class="text-dark text-hover-primary mb-1 font-size-lg"
-                  >{{ item.profile.firstName }} {{ item.profile.lastName }}</a
+                  >{{ item.name }}</a
                 >
-                <span class="text-muted">{{ item.status }}</span>
               </div>
               <!--end::Text-->
             </div>
@@ -196,8 +178,6 @@
 <script>
 import { mapActions, mapState } from "vuex";
 import UserChart from "./chart/UserChart";
-import { TEAM } from "@/utils/constants";
-import { convertKeyHaveTwoChars } from "@/helper/validation";
 
 export default {
   name: "dashboard",
@@ -222,7 +202,7 @@ export default {
       page: 1,
     },
 
-    team: "",
+    role: "",
     number: 0,
   }),
   components: {
@@ -238,17 +218,12 @@ export default {
   },
 
   mounted() {
-    this.setBreadcrumb([{ title: "Dashboard" }]);
+    this.setBreadcrumb([{ title: "Tổng quan" }]);
     this.setChart();
     this.getUserEndAtThisMonth();
   },
 
   computed: {
-    ...mapState("user/groupBy", {
-      groupByLoading: "loading",
-      groupByData: "data",
-      groupByError: "error",
-    }),
     ...mapState("user/getAll", {
       getAllLoading: "loading",
       getAllData: "data",
@@ -256,44 +231,50 @@ export default {
       getAllError: "error",
       lastPage: "lastPage",
     }),
-    teamItems() {
-      return Object.keys(TEAM).map((key) => ({
-        id: TEAM[key],
-        name: convertKeyHaveTwoChars(key),
-      }));
-    },
+    ...mapState("role/getAll", {
+      roles: "rolesList",
+    }),
   },
 
   methods: {
     ...mapActions("breadcrumbs", ["setBreadcrumb"]),
-    ...mapActions("user/groupBy", ["groupBy"]),
+    ...mapActions("role/getAll", ["getAllRoles"]),
     ...mapActions("user/getAll", ["getAll"]),
 
     async setChart() {
       this.loaded = false;
-      const column = "status";
-      await this.groupBy({
-        column: column,
-        team: this.team,
-      });
 
-      const labels = ["Internship", "Transit", "Probationary", "Official"];
-      const total = [0, 0, 0, 0];
+      const chart = [
+        {
+          name: "Admin",
+          total: 0,
+        },
+        {
+          name: "Premium User",
+          total: 0,
+        },
+        {
+          name: "User",
+          total: 0,
+        },
+      ];
 
       let number = 0;
-      this.groupByData.forEach(function (element) {
-        total[element.status - 1] = element.total;
-        number += element.total;
+      this.getAllData.forEach(function (element) {
+        number += 1;
+        chart.filter((i) =>
+          i.name === element.role.name ? (i.total += 1) : i
+        );
       });
       this.number = number;
 
       this.chartData = {
-        labels: labels,
+        labels: chart.map((i) => i.name),
         datasets: [
           {
-            label: "Status",
+            label: "Số lượng",
             backgroundColor: "#8FD1B7",
-            data: total,
+            data: chart.map((i) => i.total),
           },
         ],
       };
@@ -308,13 +289,9 @@ export default {
       });
     },
 
-    detailUser(item) {
-      this.$router.push({ name: "userEditing", params: { id: item.id } });
-    },
-
     avatar(item) {
       return !item.imagePath
-        ? "https://ui-avatars.com/api/?name=Admin"
+        ? `https://ui-avatars.com/api/?name=${item.name}`
         : process.env.VUE_APP_BASE_API_URL + "/storage/" + item.imagePath;
     },
   },

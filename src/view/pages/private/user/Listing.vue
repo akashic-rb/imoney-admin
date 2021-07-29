@@ -15,21 +15,6 @@
 
           <v-spacer></v-spacer>
 
-          <v-text-field
-            v-model="key"
-            @focus="searchClosed = false"
-            @blur="searchClosed = true"
-            @change="filterAndSearchUser"
-            color="teal"
-            placeholder="Search"
-            prepend-inner-icon="mdi-account-search"
-            class="expanding-search mt-4 mr-2 shrink"
-            :class="{ closed: searchClosed && !key }"
-            filled
-            dense
-            clearable
-          ></v-text-field>
-
           <router-link :to="{ name: 'userCreating' }">
             <v-btn color="teal" dark class="mb-2"
               ><v-icon class="mr-1">mdi-account-plus</v-icon>
@@ -203,14 +188,14 @@ export default {
 
   mounted() {
     this.setBreadcrumb([
-      { title: "User", route: "userListing" },
+      { title: "Người dùng", route: "userListing" },
       { title: "Danh sách" },
     ]);
   },
 
   methods: {
     ...mapActions("breadcrumbs", ["setBreadcrumb"]),
-    ...mapActions("user/getAll", ["getAll"]),
+    ...mapActions("user/getAll", ["getAll", "filterByName"]),
     ...mapActions("user/destroy", ["destroy"]),
 
     async getDataFromApi() {
@@ -284,13 +269,6 @@ export default {
         this.user = null;
         this.deletedIndex = -1;
       });
-    },
-
-    filterAndSearchUser() {
-      if (this.options.page !== 1) {
-        this.options.page = 1;
-      }
-      this.getDataFromApi();
     },
 
     formatDate(date) {

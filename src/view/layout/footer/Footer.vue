@@ -14,12 +14,16 @@
         </a>
       </div>
       <div class="nav nav-dark">
-        <a href="/aboutus/" target="_blank" class="nav-link pr-3 pl-0">
+        <a href="/about-us/" target="_blank" class="nav-link pr-3 pl-0">
           About
         </a>
-        <a href="/services" target="_blank" class="nav-link px-3"> Services </a>
-        <a href="/contact" target="_blank" class="nav-link pl-3 pr-0">
-          Contact
+        <a href="/services" target="_blank" class="nav-link px-3"> Dịch vụ </a>
+        <a
+          href="/terms-and-policies"
+          target="_blank"
+          class="nav-link pl-3 pr-0"
+        >
+          Điều khoản và chính sách
         </a>
       </div>
     </div>

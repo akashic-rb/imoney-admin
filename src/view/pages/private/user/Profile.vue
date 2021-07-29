@@ -1,10 +1,10 @@
 <template>
   <div class="container emp-profile">
-    <form method="post" v-if="user">
+    <form method="post" v-if="user && profile">
       <div class="row">
         <div class="col-md-4">
           <div class="profile-img">
-            <img :src="avatar" alt="" />
+            <img :src="profile.avatar_url" alt="A handsome face of admin" />
             <div class="file btn btn-lg btn-primary">
               Change Photo
               <input type="file" name="file" />
@@ -16,7 +16,7 @@
             <h5>{{ user.name }}</h5>
             <p class="profile-rating">
               Role :
-              <span>{{ user.role.name }}</span>
+              <span>{{ user.user_role }}</span>
             </p>
             <br /><br />
             <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -31,7 +31,7 @@
                   aria-controls="home"
                   aria-selected="true"
                 >
-                  About
+                  Thông tin
                 </button>
               </li>
               <li class="nav-item" role="presentation">
@@ -45,7 +45,7 @@
                   aria-controls="profile"
                   aria-selected="false"
                 >
-                  Timeline
+                  Dòng thời gian
                 </button>
               </li>
             </ul>
@@ -53,20 +53,6 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-md-4">
-          <div class="profile-work">
-            <p>SKILLS</p>
-            <div v-if="user.skills.length !== 0">
-              <span v-for="skill in user.skills" :key="skill.id"
-                ><a>{{ skill.name }}</a
-                ><br
-              /></span>
-            </div>
-            <div v-else>
-              <span><a>Have no</a></span>
-            </div>
-          </div>
-        </div>
         <div class="col-md-8">
           <div class="tab-content profile-tab" id="myTabContent">
             <div
@@ -77,28 +63,12 @@
             >
               <div class="row">
                 <div class="col-md-6">
-                  <label>Fullname</label>
+                  <label>Tên</label>
                 </div>
                 <div class="col-md-6">
                   <p>
-                    {{ user.profile.firstName }} {{ user.profile.lastName }}
+                    {{ user.name }}
                   </p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <label>Date of birth</label>
-                </div>
-                <div class="col-md-6">
-                  <p>{{ user.profile.dob }}</p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <label>Gender</label>
-                </div>
-                <div class="col-md-6">
-                  <p>{{ user.profile.gender }}</p>
                 </div>
               </div>
               <div class="row">
@@ -111,18 +81,10 @@
               </div>
               <div class="row">
                 <div class="col-md-6">
-                  <label>Phone</label>
+                  <label>Điện thoại</label>
                 </div>
                 <div class="col-md-6">
-                  <p>{{ user.phone }}</p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6">
-                  <label>University</label>
-                </div>
-                <div class="col-md-6">
-                  <p>{{ user.profile.university }}</p>
+                  <p>{{ profile.phone }}</p>
                 </div>
               </div>
             </div>
@@ -139,10 +101,10 @@
                       <v-timeline-item color="pink" small>
                         <v-row class="pt-1">
                           <v-col cols="3">
-                            <strong>{{ user.startDate }}</strong>
+                            <strong>{{ user.created_at }}</strong>
                           </v-col>
                           <v-col>
-                            <strong>Account was created</strong>
+                            <strong>Tài khoản đã được tạo</strong>
                           </v-col>
                         </v-row>
                       </v-timeline-item>
@@ -263,7 +225,7 @@ export default {
   }),
 
   mounted() {
-    this.setBreadcrumb([{ title: "My profile" }]);
+    this.setBreadcrumb([{ title: "Thông tin tài khoản" }]);
     this.getUserInfor();
 
     this.initScript();
@@ -271,6 +233,11 @@ export default {
 
   computed: {
     ...mapState("account/getInfor", ["user", "loading"]),
+    ...mapState("profile/get", {
+      error: "error",
+      profileLoading: "infoLoading",
+      profile: "profile",
+    }),
 
     avatar() {
       return !this.user.imagePath
@@ -282,9 +249,11 @@ export default {
   methods: {
     ...mapActions("breadcrumbs", ["setBreadcrumb"]),
     ...mapActions("account/getInfor", ["getUserInformationLoggedIn"]),
+    ...mapActions("profile/get", ["get"]),
 
     async getUserInfor() {
       this.getUserInformationLoggedIn();
+      this.get();
     },
 
     initScript() {
