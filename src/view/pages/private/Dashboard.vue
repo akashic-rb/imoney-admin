@@ -17,7 +17,7 @@
             <div class="card-title py-5">
               <h3 class="card-label">
                 <span class="d-block text-dark font-weight-bolder"
-                  >Tổng người dùng : {{ number }}</span
+                  >Tổng người dùng : {{ getAllData.length }}</span
                 >
                 <span class="d-block text-dark-50 mt-2 font-size-sm"
                   >Cập nhật: {{ new Date().toISOString().substr(0, 10) }}</span
@@ -53,79 +53,16 @@
           "
         >
           <!--begin::Header-->
-          <div class="card-header border-0">
-            <h3 class="card-title font-weight-bolder text-success">
-              Số người dùng đã đăng ký : {{ getAllTotal }}
-            </h3>
-            <div class="card-toolbar">
-              <div class="dropdown dropdown-inline">
-                <a
-                  href="#"
-                  class="btn btn-clean btn-hover-success btn-sm btn-icon"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  <i class="ki ki-bold-more-ver text-success"></i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-md dropdown-menu-right">
-                  <!--begin::Naviigation-->
-                  <ul class="navi">
-                    <li class="navi-header font-weight-bold py-5">
-                      <span class="font-size-lg">Add New:</span>
-                      <i
-                        class="flaticon2-information icon-md text-muted"
-                        data-toggle="tooltip"
-                        data-placement="right"
-                        title="Click to learn more..."
-                      ></i>
-                    </li>
-                    <li class="navi-separator mb-3 opacity-70"></li>
-                    <li class="navi-item">
-                      <a href="#" class="navi-link">
-                        <span class="navi-icon">
-                          <i class="flaticon2-shopping-cart-1"></i>
-                        </span>
-                        <span class="navi-text">Add new user</span>
-                      </a>
-                    </li>
-                    <li class="navi-item">
-                      <a href="#" class="navi-link">
-                        <span class="navi-icon">
-                          <i class="navi-icon flaticon2-calendar-8"></i>
-                        </span>
-                        <span class="navi-text">Users</span>
-                        <span class="navi-label">
-                          <span
-                            class="
-                              label label-light-danger label-rounded
-                              font-weight-bold
-                            "
-                            >3</span
-                          >
-                        </span>
-                      </a>
-                    </li>
-                    <li class="navi-separator mt-3 opacity-70"></li>
-                    <li class="navi-footer pt-5 pb-4">
-                      <a
-                        class="btn btn-light-primary font-weight-bolder btn-sm"
-                        href="#"
-                        >More options</a
-                      >
-                      <a
-                        class="btn btn-clean font-weight-bold btn-sm d-none"
-                        href="#"
-                        data-toggle="tooltip"
-                        data-placement="right"
-                        title="Click to learn more..."
-                        >Learn more</a
-                      >
-                    </li>
-                  </ul>
-                  <!--end::Naviigation-->
-                </div>
-              </div>
+          <div class="card-header h-auto border-0">
+            <div class="py-5">
+              <h3 class="card-label">
+                <span class="d-block font-weight-bolder text-success">
+                  Số người dùng đã đăng ký : {{ premiumUsers.length }}
+                </span>
+                <span class="d-block text-dark-50 mt-2 font-size-sm">
+                  Cập nhật: {{ new Date().toISOString().substr(0, 10) }}
+                </span>
+              </h3>
             </div>
           </div>
           <!--end::Header-->
@@ -134,7 +71,7 @@
             <!--begin::Item-->
             <div
               class="d-flex align-items-center mb-10"
-              v-for="item in getAllData"
+              v-for="item in premiumUsers"
               :key="item.id"
             >
               <!--begin::Symbol-->
@@ -159,13 +96,6 @@
               <!--end::Text-->
             </div>
             <!--end::Item-->
-            <div class="text-center" v-if="lastPage > 1">
-              <v-pagination
-                v-model="options.page"
-                :length="lastPage"
-                circle
-              ></v-pagination>
-            </div>
           </div>
           <!--end::Body-->
         </div>
@@ -204,41 +134,28 @@ export default {
 
     role: "",
     number: 0,
+    premiumUsers: [],
   }),
   components: {
     UserChart,
   },
 
-  watch: {
-    team: {
-      handler() {
-        this.setChart();
-      },
-    },
-  },
-
   mounted() {
     this.setBreadcrumb([{ title: "Tổng quan" }]);
     this.setChart();
-    this.getUserEndAtThisMonth();
+    this.getPremiumUser();
   },
 
   computed: {
     ...mapState("user/getAll", {
       getAllLoading: "loading",
       getAllData: "data",
-      getAllTotal: "total",
       getAllError: "error",
-      lastPage: "lastPage",
-    }),
-    ...mapState("role/getAll", {
-      roles: "rolesList",
     }),
   },
 
   methods: {
     ...mapActions("breadcrumbs", ["setBreadcrumb"]),
-    ...mapActions("role/getAll", ["getAllRoles"]),
     ...mapActions("user/getAll", ["getAll"]),
 
     async setChart() {
@@ -260,6 +177,7 @@ export default {
       ];
 
       let number = 0;
+      await this.getAll();
       this.getAllData.forEach(function (element) {
         number += 1;
         chart.filter((i) =>
@@ -281,12 +199,11 @@ export default {
       this.loaded = true;
     },
 
-    async getUserEndAtThisMonth() {
-      await this.getAll({
-        end: true,
-        page: this.options.page,
-        itemsPerPage: 5,
-      });
+    async getPremiumUser() {
+      await this.getAll();
+      this.premiumUsers = this.getAllData.filter(
+        (item) => item.role.name === "Premium User"
+      );
     },
 
     avatar(item) {

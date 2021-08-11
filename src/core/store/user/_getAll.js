@@ -15,6 +15,19 @@ const actions = {
     commit("LOADING");
     try {
       const res = await API.get("/users");
+      commit("SET_DATA", res.data.data);
+      return true;
+    } catch (e) {
+      commit("SET_ERROR", e);
+      return false;
+    } finally {
+      commit("LOADED");
+    }
+  },
+  async getAllWithPagination({ commit }, paginate) {
+    commit("LOADING");
+    try {
+      const res = await API.get(`/users?paginate=${paginate}`);
       commit("SET_DATA", res.data.data.data);
       commit("SET_TOTAL", res.data.data.total);
       commit("SET_TOTALPAGE", res.data.data.last_page);

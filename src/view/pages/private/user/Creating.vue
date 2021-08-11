@@ -40,6 +40,7 @@
             <v-col cols="12" md="6">
               <v-text-field
                 v-model="username"
+                :rules="usernameRules"
                 label="Tên đăng nhập"
                 required
               ></v-text-field>
@@ -109,13 +110,16 @@ export default {
 
     name: "",
     nameRules: [
-      (v) => !!v || "Firstname is required",
-      (v) => /^[A-Za-z]+$/.test(v) || "Tên không được chứa kí tự đặc biệt",
+      (v) => !!v || "Tên là bắt buộc",
       (v) => (v && v.length <= 20) || "Tên quá dài",
     ],
 
     username: "",
-
+    usernameRules: [
+      (v) => !!v || "Tên đăng nhập là bắt buộc",
+      (v) => /^[A-Za-z0-9]+$/.test(v) || "Tên không được chứa kí tự đặc biệt",
+      (v) => (v && v.length <= 20) || "Tên quá dài",
+    ],
     menu: false,
 
     role: "",
@@ -158,6 +162,7 @@ export default {
         formData.append("email", this.email);
         formData.append("password", this.password);
         formData.append("name", this.name);
+        formData.append("username", this.username);
         formData.append("role_id", this.role);
         setTimeout(async () => {
           const isSucceeded = await this.create(formData);

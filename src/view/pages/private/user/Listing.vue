@@ -5,7 +5,8 @@
       :items="data"
       :options.sync="options"
       :server-items-length="total"
-      :loading="loading"
+      :loading="getAllLoading"
+      :items-per-page="-1"
       loading-text="Loading... Please wait"
       class="elevation-1"
     >
@@ -102,6 +103,9 @@
           mdi-delete
         </v-icon>
       </template>
+      <template>
+        <v-data-footer :disable-items-per-page="true" />
+      </template>
     </v-data-table>
   </div>
 </template>
@@ -127,6 +131,7 @@ export default {
   data: () => ({
     options: {
       page: 1,
+      itemsPerPage: 10,
     },
 
     headers: [
@@ -134,12 +139,13 @@ export default {
         text: "Tên",
         align: "start",
         value: "name",
+        sortable: false,
       },
-      { text: "Email", value: "email" },
-      { text: "Tên đăng nhập", value: "username" },
-      { text: "Role", value: "role" },
-      { text: "Ngày tạo", value: "createDate" },
-      { text: "Xác thực", value: "verified" },
+      { text: "Email", value: "email", sortable: false },
+      { text: "Tên đăng nhập", value: "username", sortable: false },
+      { text: "Role", value: "role", sortable: false },
+      { text: "Ngày tạo", value: "createDate", sortable: false },
+      { text: "Xác thực", value: "verified", sortable: false },
       { text: "Actions", value: "actions", sortable: false },
     ],
 
@@ -165,11 +171,10 @@ export default {
     JsonCSV,
     JsonExcel,
   },
-
   watch: {
     options: {
-      handler() {
-        this.getDataFromApi();
+      handle() {
+        return this.getAllWithPagination(this.options.itemsPerPage);
       },
     },
   },
@@ -191,26 +196,18 @@ export default {
       { title: "Người dùng", route: "userListing" },
       { title: "Danh sách" },
     ]);
+    this.getAllWithPagination(this.options.itemsPerPage);
   },
 
   methods: {
     ...mapActions("breadcrumbs", ["setBreadcrumb"]),
-    ...mapActions("user/getAll", ["getAll"]),
+    ...mapActions("user/getAll", ["getAllWithPagination"]),
     ...mapActions("user/destroy", ["destroy"]),
 
     async getDataFromApi() {
       this.loading = true;
 
-      const { sortBy, sortDesc, page, itemsPerPage } = this.options;
-
-      await this.getAll({
-        key: this.key,
-        team: this.team,
-        sortBy: sortBy[0],
-        sortDesc: sortDesc[0],
-        page: page,
-        itemsPerPage: itemsPerPage,
-      });
+      await this.getAllWithPagination(this.options.itemsPerPage);
       const temp = [];
       this.data.forEach(function (item) {
         temp.push({

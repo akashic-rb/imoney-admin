@@ -39,17 +39,19 @@
             <v-col cols="12" md="6">
               <v-text-field
                 v-model="user.username"
-                :rules="username"
                 label="Tên đăng nhập"
                 required
               ></v-text-field>
             </v-col>
             <v-col cols="12" md="6">
-              <v-text-field
-                v-model="user.role.name"
+              <v-select
+                v-model="user.role"
+                :items="allRoles"
+                item-text="name"
+                item-value="role_id"
                 label="Role"
                 required
-              ></v-text-field>
+              ></v-select>
             </v-col>
           </v-row>
         </v-card-text>
@@ -135,12 +137,13 @@ export default {
     saving: false,
   }),
 
-  async mounted() {
+  mounted() {
     this.setBreadcrumb([
       { title: "Người dùng", route: "userListing" },
       { title: "Chỉnh sửa" },
     ]);
     this.getUser();
+    this.getAllRoles();
   },
 
   computed: {
@@ -153,12 +156,17 @@ export default {
       error: "error",
       updateLoading: "loading",
     }),
+
+    ...mapState("role/getAll", {
+      allRoles: "rolesList",
+    }),
   },
 
   methods: {
     ...mapActions("breadcrumbs", ["setBreadcrumb"]),
     ...mapActions("user/get", ["get"]),
     ...mapActions("user/update", ["update"]),
+    ...mapActions("role/getAll", ["getAllRoles"]),
 
     async getUser() {
       this.loading = true;
@@ -175,7 +183,11 @@ export default {
         formData.append("email", this.user.email);
         formData.append("name", this.user.name);
         formData.append("username", this.user.username);
-        formData.append("user_id", this.user.user_id);
+        formData.append(
+          "role_id",
+          typeof this.user.role == "object" ? this.user.role_id : this.user.role
+        );
+        formData.append("_method", "PUT");
 
         setTimeout(async () => {
           const isSucceeded = await this.update({
